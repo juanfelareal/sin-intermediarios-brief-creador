@@ -417,22 +417,6 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="creatorAddress">Dirección de residencia *</label>
-          <input type="text" id="creatorAddress" placeholder="Dirección completa para envío de productos" required>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="creatorCity">Ciudad *</label>
-            <input type="text" id="creatorCity" placeholder="Ej: Bogotá" required>
-          </div>
-          <div class="form-group">
-            <label for="creatorDepartment">Departamento *</label>
-            <input type="text" id="creatorDepartment" placeholder="Ej: Cundinamarca" required>
-          </div>
-        </div>
-
         <p style="margin-top: 16px;">En adelante denominado/a <strong>"EL/LA CREADOR(A)"</strong>.</p>
       </section>
 
@@ -792,7 +776,6 @@
     function validateForm() {
       const requiredFields = [
         'creatorName', 'creatorId', 'creatorEmail', 'creatorPhone',
-        'creatorAddress', 'creatorCity', 'creatorDepartment',
         'bankName', 'accountType', 'accountNumber'
       ];
 
@@ -826,10 +809,7 @@
           name: document.getElementById('creatorName').value,
           id: document.getElementById('creatorId').value,
           email: document.getElementById('creatorEmail').value,
-          phone: document.getElementById('creatorPhone').value,
-          address: document.getElementById('creatorAddress').value,
-          city: document.getElementById('creatorCity').value,
-          department: document.getElementById('creatorDepartment').value
+          phone: document.getElementById('creatorPhone').value
         },
         bank: {
           name: document.getElementById('bankName').value,
