@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contrato de Creación de Contenido UGC — LA REAL MARKETING SAS</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream: #F5F0EB;
+      --dark: #17181A;
+      --green: #16a34a;
+      --green-light: #22c55e;
+      --green-bg: #dcfce7;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    /* Header */
+    .header {
+      background: var(--dark);
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    .header-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .header img {
+      height: 40px;
+      margin-bottom: 24px;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      color: rgba(255,255,255,0.6);
+      font-size: 14px;
+    }
+
+    /* Contract Section */
+    .contract-section {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .contract-section h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--green);
+    }
+
+    .contract-section h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--dark);
+      margin: 20px 0 10px;
+    }
+
+    .contract-section p {
+      margin-bottom: 12px;
+      text-align: justify;
+    }
+
+    .contract-section ul, .contract-section ol {
+      margin: 12px 0 12px 24px;
+    }
+
+    .contract-section li {
+      margin-bottom: 8px;
+    }
+
+    .highlight-box {
+      background: var(--green-bg);
+      border-left: 4px solid var(--green);
+      padding: 16px 20px;
+      margin: 20px 0;
+      border-radius: 0 12px 12px 0;
+    }
+
+    .highlight-box strong {
+      color: var(--green);
+    }
+
+    /* Project Details */
+    .project-details {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    @media (max-width: 500px) {
+      .project-details { grid-template-columns: 1fr; }
+    }
+
+    .detail-card {
+      background: var(--gray-100);
+      padding: 16px;
+      border-radius: 12px;
+    }
+
+    .detail-card .label {
+      font-size: 12px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .detail-card .value {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid var(--gray-200);
+      border-radius: 12px;
+      font-size: 15px;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus, .form-group select:focus {
+      outline: none;
+      border-color: var(--green);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 500px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    /* Signature Pad */
+    .signature-section {
+      margin-top: 24px;
+    }
+
+    .signature-pad-container {
+      background: white;
+      border: 2px dashed var(--gray-300);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .signature-pad {
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      background: #fafafa;
+      touch-action: none;
+      cursor: crosshair;
+    }
+
+    .signature-hint {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-top: 12px;
+    }
+
+    .signature-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      justify-content: center;
+    }
+
+    .btn-clear {
+      padding: 10px 20px;
+      background: var(--gray-100);
+      color: var(--gray-600);
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-clear:hover {
+      background: var(--gray-200);
+    }
+
+    /* Checkbox */
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin: 20px 0;
+      padding: 16px;
+      background: var(--cream);
+      border-radius: 12px;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      accent-color: var(--green);
+      flex-shrink: 0;
+    }
+
+    .checkbox-group label {
+      font-size: 14px;
+      color: var(--gray-700);
+      cursor: pointer;
+    }
+
+    /* Submit Button */
+    .submit-section {
+      text-align: center;
+      padding: 32px;
+    }
+
+    .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--green);
+      color: white;
+      padding: 18px 40px;
+      border: none;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-submit:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(22, 163, 74, 0.4);
+    }
+
+    .btn-submit:disabled {
+      background: var(--gray-400);
+      cursor: not-allowed;
+    }
+
+    /* Success State */
+    .success-message {
+      display: none;
+      background: var(--green-bg);
+      border: 2px solid var(--green);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    .success-message .icon {
+      width: 64px;
+      height: 64px;
+      background: var(--green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 32px;
+      color: white;
+    }
+
+    .success-message h3 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .success-message p {
+      color: var(--gray-600);
+    }
+
+    /* Contract form hidden after success */
+    .contract-form.hidden {
+      display: none;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 32px;
+      color: var(--gray-400);
+      font-size: 13px;
+    }
+
+    /* Print styles */
+    @media print {
+      body { background: white; }
+      .header { background: white; color: black; }
+      .header h1, .header p { color: black; }
+      .btn-submit, .btn-clear, .signature-actions { display: none; }
+      .contract-section { box-shadow: none; border: 1px solid #ddd; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <img src="logo-la-real.png" alt="LA REAL">
+      <h1>Contrato de Creación de Contenido UGC</h1>
+      <p>Acuerdo de colaboración y cesión de derechos de imagen</p>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Success Message (hidden by default) -->
+    <div class="success-message" id="successMessage">
+      <div class="icon">✓</div>
+      <h3>¡Contrato firmado exitosamente!</h3>
+      <p>Hemos recibido tu contrato firmado. Te enviaremos una copia a tu correo electrónico.</p>
+      <p style="margin-top: 16px; font-size: 14px;">Ya puedes cerrar esta página y esperar a que te llegue el producto.</p>
+    </div>
+
+    <!-- Contract Form -->
+    <div class="contract-form" id="contractForm">
+
+      <!-- Parties -->
+      <section class="contract-section">
+        <h2>1. Las Partes</h2>
+
+        <p>El presente contrato de prestación de servicios y cesión de derechos de imagen se celebra entre:</p>
+
+        <div class="highlight-box">
+          <strong>LA CONTRATANTE:</strong><br>
+          <strong>LA REAL MARKETING SAS</strong>, sociedad comercial identificada con NIT 901.XXXXXX-X,
+          con domicilio en la ciudad de Bogotá D.C., Colombia, representada legalmente,
+          en adelante denominada <strong>"LA AGENCIA"</strong>.
+        </div>
+
+        <p>Y por otra parte:</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="creatorName">Nombre completo *</label>
+            <input type="text" id="creatorName" placeholder="Como aparece en tu cédula" required>
+          </div>
+          <div class="form-group">
+            <label for="creatorId">Número de cédula *</label>
+            <input type="text" id="creatorId" placeholder="Sin puntos ni comas" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="creatorEmail">Correo electrónico *</label>
+            <input type="email" id="creatorEmail" placeholder="tu@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="creatorPhone">Teléfono / WhatsApp *</label>
+            <input type="tel" id="creatorPhone" placeholder="+57 300 123 4567" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="creatorAddress">Dirección de residencia *</label>
+          <input type="text" id="creatorAddress" placeholder="Dirección completa para envío de productos" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="creatorCity">Ciudad *</label>
+            <input type="text" id="creatorCity" placeholder="Ej: Bogotá" required>
+          </div>
+          <div class="form-group">
+            <label for="creatorDepartment">Departamento *</label>
+            <input type="text" id="creatorDepartment" placeholder="Ej: Cundinamarca" required>
+          </div>
+        </div>
+
+        <p style="margin-top: 16px;">En adelante denominado/a <strong>"EL/LA CREADOR(A)"</strong>.</p>
+      </section>
+
+      <!-- Project Details -->
+      <section class="contract-section">
+        <h2>2. Objeto del Contrato</h2>
+
+        <p>EL/LA CREADOR(A) se compromete a prestar sus servicios de creación de contenido audiovisual
+        tipo UGC (User Generated Content) para la marca cliente de LA AGENCIA, bajo las siguientes condiciones:</p>
+
+        <div class="project-details">
+          <div class="detail-card">
+            <div class="label">Marca</div>
+            <div class="value">Sin Intermediarios</div>
+          </div>
+          <div class="detail-card">
+            <div class="label">Cantidad de videos</div>
+            <div class="value">2 videos</div>
+          </div>
+          <div class="detail-card">
+            <div class="label">Pago por video</div>
+            <div class="value">$150.000 COP</div>
+          </div>
+          <div class="detail-card">
+            <div class="label">Pago total</div>
+            <div class="value">$300.000 COP</div>
+          </div>
+        </div>
+
+        <p>Adicionalmente, EL/LA CREADOR(A) recibirá productos de la marca con fines de creación de contenido,
+        los cuales podrá conservar después del proyecto.</p>
+      </section>
+
+      <!-- Deliverables -->
+      <section class="contract-section">
+        <h2>3. Entregables y Especificaciones</h2>
+
+        <p>EL/LA CREADOR(A) se obliga a entregar:</p>
+
+        <ol>
+          <li>La cantidad de videos acordada según las especificaciones técnicas del brief proporcionado.</li>
+          <li>Todo el material crudo (RAW footage) sin editar de cada video.</li>
+          <li>Los archivos en formato digital de alta calidad (mínimo 1080p, formato vertical 9:16).</li>
+        </ol>
+
+        <p>El contenido debe ser:</p>
+        <ul>
+          <li>Original y creado exclusivamente para este proyecto.</li>
+          <li>Libre de derechos de terceros (música, imágenes, etc. que requieran licencia).</li>
+          <li>Acorde con las directrices del brief y la identidad de la marca.</li>
+        </ul>
+      </section>
+
+      <!-- Image Rights -->
+      <section class="contract-section">
+        <h2>4. Cesión de Derechos de Imagen y Contenido</h2>
+
+        <div class="highlight-box">
+          <strong>CLÁUSULA IMPORTANTE:</strong> Esta sección establece los derechos que cedes sobre tu imagen y el contenido creado.
+        </div>
+
+        <h3>4.1. Cesión de Derechos Patrimoniales</h3>
+        <p>EL/LA CREADOR(A) cede a LA AGENCIA, de manera <strong>exclusiva, irrevocable y a título gratuito</strong>
+        (la compensación económica acordada cubre esta cesión), los siguientes derechos patrimoniales sobre
+        todo el contenido creado en el marco de este contrato:</p>
+
+        <ul>
+          <li><strong>Derecho de reproducción:</strong> Reproducir el contenido en cualquier formato o medio.</li>
+          <li><strong>Derecho de comunicación pública:</strong> Publicar y difundir el contenido.</li>
+          <li><strong>Derecho de transformación:</strong> Modificar, editar, adaptar o crear obras derivadas.</li>
+          <li><strong>Derecho de distribución:</strong> Distribuir copias del contenido.</li>
+        </ul>
+
+        <h3>4.2. Uso del Contenido</h3>
+        <p>LA AGENCIA y su cliente (la marca) podrán utilizar el contenido y la imagen de EL/LA CREADOR(A) para:</p>
+
+        <ul>
+          <li><strong>Publicidad pagada (pauta digital):</strong> Anuncios en Meta (Facebook/Instagram), TikTok, YouTube, Google y cualquier otra plataforma publicitaria.</li>
+          <li><strong>Contenido orgánico:</strong> Publicaciones en redes sociales, sitio web, email marketing y cualquier canal de comunicación de la marca.</li>
+          <li><strong>Material promocional:</strong> Presentaciones, catálogos, punto de venta (físico o digital).</li>
+        </ul>
+
+        <h3>4.3. Territorio y Duración</h3>
+        <p>La cesión de derechos se otorga para:</p>
+        <ul>
+          <li><strong>Territorio:</strong> Todo el mundo, sin restricción geográfica.</li>
+          <li><strong>Duración:</strong> Por un período de <strong>dos (2) años</strong> contados a partir de la fecha de firma del presente contrato.</li>
+        </ul>
+
+        <h3>4.4. Exclusividad de Categoría</h3>
+        <p>Durante la vigencia de este contrato y por un período de <strong>noventa (90) días</strong> posteriores
+        a la entrega del contenido, EL/LA CREADOR(A) se compromete a NO crear contenido publicitario para
+        marcas competidoras directas en la misma categoría de producto (suplementos deportivos).</p>
+      </section>
+
+      <!-- Payment -->
+      <section class="contract-section">
+        <h2>5. Forma de Pago</h2>
+
+        <p>LA AGENCIA realizará el pago acordado de la siguiente manera:</p>
+
+        <ul>
+          <li><strong>100% del pago</strong> dentro de los quince (15) días hábiles siguientes a la aprobación final del contenido entregado.</li>
+          <li>El pago se realizará por transferencia bancaria a la cuenta que EL/LA CREADOR(A) indique.</li>
+        </ul>
+
+        <div class="form-group" style="margin-top: 20px;">
+          <label for="bankName">Banco *</label>
+          <input type="text" id="bankName" placeholder="Ej: Bancolombia, Davivienda, Nequi..." required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="accountType">Tipo de cuenta *</label>
+            <select id="accountType" required>
+              <option value="">Selecciona...</option>
+              <option value="ahorros">Cuenta de Ahorros</option>
+              <option value="corriente">Cuenta Corriente</option>
+              <option value="nequi">Nequi</option>
+              <option value="daviplata">Daviplata</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="accountNumber">Número de cuenta *</label>
+            <input type="text" id="accountNumber" placeholder="Sin espacios ni guiones" required>
+          </div>
+        </div>
+      </section>
+
+      <!-- Warranties -->
+      <section class="contract-section">
+        <h2>6. Declaraciones y Garantías</h2>
+
+        <p>EL/LA CREADOR(A) declara y garantiza que:</p>
+
+        <ol>
+          <li>Es mayor de edad y tiene plena capacidad legal para celebrar este contrato.</li>
+          <li>El contenido que creará es original y no infringe derechos de propiedad intelectual de terceros.</li>
+          <li>No tiene impedimentos legales o contractuales que le impidan cumplir con este acuerdo.</li>
+          <li>Los datos personales proporcionados son verídicos y actualizados.</li>
+          <li>Autoriza el uso de su imagen según lo establecido en la cláusula 4.</li>
+        </ol>
+      </section>
+
+      <!-- Confidentiality -->
+      <section class="contract-section">
+        <h2>7. Confidencialidad</h2>
+
+        <p>EL/LA CREADOR(A) se compromete a mantener estricta confidencialidad sobre:</p>
+
+        <ul>
+          <li>Los términos económicos de este contrato.</li>
+          <li>La información estratégica de la marca que pueda conocer durante el proyecto.</li>
+          <li>Los materiales, briefs o información proporcionada por LA AGENCIA.</li>
+        </ul>
+
+        <p>Esta obligación de confidencialidad permanecerá vigente incluso después de terminado el contrato.</p>
+      </section>
+
+      <!-- Data Protection -->
+      <section class="contract-section">
+        <h2>8. Protección de Datos Personales</h2>
+
+        <p>En cumplimiento de la Ley 1581 de 2012 y el Decreto 1377 de 2013 (Régimen de Protección de Datos Personales en Colombia):</p>
+
+        <ul>
+          <li>EL/LA CREADOR(A) autoriza a LA AGENCIA para recolectar, almacenar y usar sus datos personales con el fin de ejecutar este contrato.</li>
+          <li>Los datos serán tratados de manera confidencial y no serán compartidos con terceros no relacionados con el proyecto.</li>
+          <li>EL/LA CREADOR(A) podrá ejercer sus derechos de acceso, actualización, rectificación y supresión escribiendo a: contacto@larealmarketing.com</li>
+        </ul>
+      </section>
+
+      <!-- Termination -->
+      <section class="contract-section">
+        <h2>9. Incumplimiento y Terminación</h2>
+
+        <p>El incumplimiento de cualquiera de las obligaciones aquí pactadas dará derecho a la parte cumplida a:</p>
+
+        <ol>
+          <li>Exigir el cumplimiento forzoso de las obligaciones.</li>
+          <li>Dar por terminado el contrato de manera unilateral.</li>
+          <li>Solicitar la indemnización de perjuicios correspondiente.</li>
+        </ol>
+
+        <p>En caso de terminación anticipada por parte de EL/LA CREADOR(A) sin justa causa,
+        deberá devolver los productos recibidos y no tendrá derecho a compensación alguna.</p>
+      </section>
+
+      <!-- Legal -->
+      <section class="contract-section">
+        <h2>10. Disposiciones Finales</h2>
+
+        <ul>
+          <li><strong>Ley aplicable:</strong> Este contrato se rige por las leyes de la República de Colombia.</li>
+          <li><strong>Resolución de conflictos:</strong> Cualquier controversia será resuelta inicialmente de manera amigable.
+          De no ser posible, se someterá a los jueces y tribunales de la ciudad de Bogotá D.C.</li>
+          <li><strong>Independencia:</strong> Este acuerdo no genera relación laboral entre las partes.
+          EL/LA CREADOR(A) actúa como contratista independiente.</li>
+          <li><strong>Modificaciones:</strong> Cualquier modificación a este contrato deberá constar por escrito.</li>
+        </ul>
+      </section>
+
+      <!-- Signature -->
+      <section class="contract-section">
+        <h2>11. Aceptación y Firma</h2>
+
+        <p>Al firmar este documento, EL/LA CREADOR(A) declara que ha leído, entendido y acepta
+        todas las cláusulas y condiciones establecidas en el presente contrato.</p>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="acceptTerms" required>
+          <label for="acceptTerms">
+            He leído y acepto todos los términos y condiciones de este contrato, incluyendo la
+            cesión de derechos de imagen para uso en publicidad pagada y contenido orgánico
+            por un período de 2 años.
+          </label>
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="acceptData" required>
+          <label for="acceptData">
+            Autorizo el tratamiento de mis datos personales conforme a la política de
+            protección de datos de LA REAL MARKETING SAS y la Ley 1581 de 2012.
+          </label>
+        </div>
+
+        <div class="signature-section">
+          <label style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 12px;">
+            Tu firma *
+          </label>
+          <div class="signature-pad-container">
+            <canvas id="signaturePad" class="signature-pad" width="600" height="200"></canvas>
+            <p class="signature-hint">Dibuja tu firma con el dedo o el mouse</p>
+            <div class="signature-actions">
+              <button type="button" class="btn-clear" onclick="clearSignature()">Borrar firma</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 24px;">
+          <label for="signatureDate">Fecha de firma</label>
+          <input type="text" id="signatureDate" readonly>
+        </div>
+      </section>
+
+      <!-- Submit -->
+      <div class="submit-section">
+        <button type="button" class="btn-submit" id="submitBtn" onclick="submitContract()" disabled>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          Firmar Contrato
+        </button>
+        <p style="margin-top: 16px; font-size: 13px; color: var(--gray-500);">
+          Al hacer clic, confirmas que toda la información es correcta.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>LA REAL MARKETING SAS · NIT 901.XXXXXX-X · Bogotá, Colombia</p>
+    <p style="margin-top: 8px;">Este documento tiene validez legal como contrato electrónico según la Ley 527 de 1999.</p>
+  </footer>
+
+  <script>
+    // Signature Pad
+    const canvas = document.getElementById('signaturePad');
+    const ctx = canvas.getContext('2d');
+    let isDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+    let hasSignature = false;
+
+    // Set up canvas for high DPI displays
+    function setupCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+      canvas.style.width = rect.width + 'px';
+      canvas.style.height = rect.height + 'px';
+
+      ctx.strokeStyle = '#17181A';
+      ctx.lineWidth = 2;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+    }
+
+    setupCanvas();
+    window.addEventListener('resize', setupCanvas);
+
+    // Get position relative to canvas
+    function getPosition(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+      };
+    }
+
+    // Drawing functions
+    function startDrawing(e) {
+      e.preventDefault();
+      isDrawing = true;
+      const pos = getPosition(e);
+      lastX = pos.x;
+      lastY = pos.y;
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      e.preventDefault();
+
+      const pos = getPosition(e);
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+
+      lastX = pos.x;
+      lastY = pos.y;
+      hasSignature = true;
+      validateForm();
+    }
+
+    function stopDrawing() {
+      isDrawing = false;
+    }
+
+    // Mouse events
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDrawing);
+    canvas.addEventListener('mouseout', stopDrawing);
+
+    // Touch events
+    canvas.addEventListener('touchstart', startDrawing);
+    canvas.addEventListener('touchmove', draw);
+    canvas.addEventListener('touchend', stopDrawing);
+
+    function clearSignature() {
+      const rect = canvas.getBoundingClientRect();
+      ctx.clearRect(0, 0, rect.width, rect.height);
+      hasSignature = false;
+      validateForm();
+    }
+
+    // Set current date
+    const now = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    document.getElementById('signatureDate').value = now.toLocaleDateString('es-CO', options);
+
+    // Form validation
+    function validateForm() {
+      const requiredFields = [
+        'creatorName', 'creatorId', 'creatorEmail', 'creatorPhone',
+        'creatorAddress', 'creatorCity', 'creatorDepartment',
+        'bankName', 'accountType', 'accountNumber'
+      ];
+
+      const allFieldsFilled = requiredFields.every(id => {
+        const el = document.getElementById(id);
+        return el && el.value.trim() !== '';
+      });
+
+      const termsAccepted = document.getElementById('acceptTerms').checked;
+      const dataAccepted = document.getElementById('acceptData').checked;
+
+      const isValid = allFieldsFilled && termsAccepted && dataAccepted && hasSignature;
+      document.getElementById('submitBtn').disabled = !isValid;
+    }
+
+    // Add validation listeners
+    document.querySelectorAll('input, select').forEach(el => {
+      el.addEventListener('change', validateForm);
+      el.addEventListener('input', validateForm);
+    });
+
+    // Submit contract
+    async function submitContract() {
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<span>Procesando...</span>';
+
+      // Collect form data
+      const contractData = {
+        creator: {
+          name: document.getElementById('creatorName').value,
+          id: document.getElementById('creatorId').value,
+          email: document.getElementById('creatorEmail').value,
+          phone: document.getElementById('creatorPhone').value,
+          address: document.getElementById('creatorAddress').value,
+          city: document.getElementById('creatorCity').value,
+          department: document.getElementById('creatorDepartment').value
+        },
+        bank: {
+          name: document.getElementById('bankName').value,
+          accountType: document.getElementById('accountType').value,
+          accountNumber: document.getElementById('accountNumber').value
+        },
+        signature: canvas.toDataURL('image/png'),
+        signedAt: new Date().toISOString(),
+        project: {
+          brand: 'Sin Intermediarios',
+          videos: 2,
+          pricePerVideo: 150000,
+          totalPayment: 300000
+        }
+      };
+
+      // Here you would send to your API
+      // For now, we'll simulate success
+      console.log('Contract data:', contractData);
+
+      // TODO: Send to AgenciaPro API
+      // await fetch('https://your-api.com/contracts', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify(contractData)
+      // });
+
+      // Show success
+      setTimeout(() => {
+        document.getElementById('contractForm').classList.add('hidden');
+        document.getElementById('successMessage').classList.add('show');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 1500);
+    }
+  </script>
+
+</body>
+</html>
