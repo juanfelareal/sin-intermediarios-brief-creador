@@ -797,52 +797,71 @@
       el.addEventListener('input', validateForm);
     });
 
+    // API Configuration
+    const API_URL = 'https://agenciapro-production.up.railway.app/api';
+
+    // Get token from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const contractToken = urlParams.get('token');
+
     // Submit contract
     async function submitContract() {
       const btn = document.getElementById('submitBtn');
       btn.disabled = true;
       btn.innerHTML = '<span>Procesando...</span>';
 
-      // Collect form data
+      // Collect form data for API
       const contractData = {
-        creator: {
-          name: document.getElementById('creatorName').value,
-          id: document.getElementById('creatorId').value,
-          email: document.getElementById('creatorEmail').value,
-          phone: document.getElementById('creatorPhone').value
-        },
-        bank: {
-          name: document.getElementById('bankName').value,
-          accountType: document.getElementById('accountType').value,
-          accountNumber: document.getElementById('accountNumber').value
-        },
-        signature: canvas.toDataURL('image/png'),
-        signedAt: new Date().toISOString(),
-        project: {
-          brand: 'Sin Intermediarios',
-          videos: 2,
-          pricePerVideo: 150000,
-          totalPayment: 300000
-        }
+        signer_name: document.getElementById('creatorName').value,
+        signer_cedula: document.getElementById('creatorId').value,
+        signer_email: document.getElementById('creatorEmail').value,
+        signer_phone: document.getElementById('creatorPhone').value,
+        bank_name: document.getElementById('bankName').value,
+        bank_account_type: document.getElementById('accountType').value,
+        bank_account_number: document.getElementById('accountNumber').value,
+        signature_data: canvas.toDataURL('image/png'),
+        accepted_terms: document.getElementById('acceptTerms').checked,
+        accepted_data_policy: document.getElementById('acceptData').checked
       };
 
-      // Here you would send to your API
-      // For now, we'll simulate success
-      console.log('Contract data:', contractData);
+      try {
+        // If we have a token, send to AgenciaPro API
+        if (contractToken) {
+          const response = await fetch(`${API_URL}/ugc/contracts/${contractToken}/sign`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(contractData)
+          });
 
-      // TODO: Send to AgenciaPro API
-      // await fetch('https://your-api.com/contracts', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(contractData)
-      // });
+          const result = await response.json();
 
-      // Show success
-      setTimeout(() => {
+          if (!response.ok) {
+            throw new Error(result.error || 'Error al firmar el contrato');
+          }
+
+          console.log('✅ Contract signed:', result);
+        } else {
+          // No token - just log (for testing without backend)
+          console.log('⚠️ No token provided, contract data:', contractData);
+        }
+
+        // Show success
         document.getElementById('contractForm').classList.add('hidden');
         document.getElementById('successMessage').classList.add('show');
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 1500);
+
+      } catch (error) {
+        console.error('Error signing contract:', error);
+        btn.disabled = false;
+        btn.innerHTML = `
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          Firmar Contrato
+        `;
+        alert(error.message || 'Error al firmar el contrato. Por favor intenta de nuevo.');
+      }
     }
   </script>
 
