@@ -430,19 +430,19 @@
         <div class="project-details">
           <div class="detail-card">
             <div class="label">Marca</div>
-            <div class="value">Sin Intermediarios</div>
+            <div class="value" id="projectBrand">Cargando...</div>
           </div>
           <div class="detail-card">
             <div class="label">Cantidad de videos</div>
-            <div class="value">2 videos</div>
+            <div class="value" id="projectVideoCount">Cargando...</div>
           </div>
           <div class="detail-card">
             <div class="label">Pago por video</div>
-            <div class="value">$150.000 COP</div>
+            <div class="value" id="projectPricePerVideo">Cargando...</div>
           </div>
           <div class="detail-card">
             <div class="label">Pago total</div>
-            <div class="value">$300.000 COP</div>
+            <div class="value" id="projectTotalPayment">Cargando...</div>
           </div>
         </div>
 
@@ -803,6 +803,75 @@
     // Get token from URL
     const urlParams = new URLSearchParams(window.location.search);
     const contractToken = urlParams.get('token');
+
+    // Format currency
+    function formatCurrency(amount) {
+      return '$' + new Intl.NumberFormat('es-CO').format(amount) + ' COP';
+    }
+
+    // Load contract data from API
+    async function loadContractData() {
+      if (!contractToken) {
+        console.warn('⚠️ No contract token provided');
+        document.getElementById('projectBrand').textContent = 'Sin token';
+        document.getElementById('projectVideoCount').textContent = '-';
+        document.getElementById('projectPricePerVideo').textContent = '-';
+        document.getElementById('projectTotalPayment').textContent = '-';
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/ugc/contracts/${contractToken}`);
+        const data = await response.json();
+
+        if (!response.ok) {
+          // Handle specific errors
+          if (data.already_signed) {
+            document.getElementById('contractForm').classList.add('hidden');
+            document.getElementById('successMessage').classList.add('show');
+            document.querySelector('#successMessage h3').textContent = 'Contrato ya firmado';
+            document.querySelector('#successMessage p').textContent = 'Este contrato ya fue firmado anteriormente.';
+            return;
+          }
+          throw new Error(data.error || 'Error al cargar el contrato');
+        }
+
+        // Populate contract details
+        const contract = data.contract;
+        document.getElementById('projectBrand').textContent = contract.project.client_name;
+        document.getElementById('projectVideoCount').textContent = contract.payment.video_count + ' video' + (contract.payment.video_count > 1 ? 's' : '');
+        document.getElementById('projectPricePerVideo').textContent = formatCurrency(contract.payment.price_per_video);
+        document.getElementById('projectTotalPayment').textContent = formatCurrency(contract.payment.total);
+
+        // Pre-fill creator data if available
+        if (contract.creator.name) {
+          document.getElementById('creatorName').value = contract.creator.name;
+        }
+        if (contract.creator.cedula) {
+          document.getElementById('creatorId').value = contract.creator.cedula;
+        }
+        if (contract.creator.email) {
+          document.getElementById('creatorEmail').value = contract.creator.email;
+        }
+        if (contract.creator.phone) {
+          document.getElementById('creatorPhone').value = contract.creator.phone;
+        }
+
+        console.log('✅ Contract loaded:', contract);
+        validateForm();
+
+      } catch (error) {
+        console.error('Error loading contract:', error);
+        document.getElementById('projectBrand').textContent = 'Error';
+        document.getElementById('projectVideoCount').textContent = '-';
+        document.getElementById('projectPricePerVideo').textContent = '-';
+        document.getElementById('projectTotalPayment').textContent = '-';
+        alert('Error al cargar el contrato: ' + error.message);
+      }
+    }
+
+    // Load contract data on page load
+    loadContractData();
 
     // Submit contract
     async function submitContract() {
