@@ -377,6 +377,64 @@
       <p style="margin-top: 16px; font-size: 14px;">Ya puedes cerrar esta página y esperar a que te llegue el producto.</p>
     </div>
 
+    <!-- Already Signed View (hidden by default) -->
+    <div class="already-signed-view" id="alreadySignedView" style="display: none;">
+      <div class="contract-section" style="text-align: center; background: var(--green-bg); border: 2px solid var(--green);">
+        <div class="icon" style="width: 64px; height: 64px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 32px; color: white;">✓</div>
+        <h3 style="font-size: 24px; font-weight: 700; color: var(--dark); margin-bottom: 8px;">Contrato ya firmado</h3>
+        <p style="color: var(--gray-600);">Este contrato fue firmado el <strong id="signedAtDate">-</strong></p>
+      </div>
+
+      <section class="contract-section">
+        <h2>Resumen del Contrato</h2>
+
+        <h3>Información del Firmante</h3>
+        <div class="project-details">
+          <div class="detail-card">
+            <div class="label">Nombre</div>
+            <div class="value" id="signerName">-</div>
+          </div>
+          <div class="detail-card">
+            <div class="label">Cédula</div>
+            <div class="value" id="signerCedula">-</div>
+          </div>
+          <div class="detail-card">
+            <div class="label">Email</div>
+            <div class="value" id="signerEmail">-</div>
+          </div>
+          <div class="detail-card">
+            <div class="label">Teléfono</div>
+            <div class="value" id="signerPhone">-</div>
+          </div>
+        </div>
+
+        <h3 style="margin-top: 24px;">Detalles del Proyecto</h3>
+        <div class="project-details">
+          <div class="detail-card">
+            <div class="label">Marca</div>
+            <div class="value" id="signedProjectBrand">-</div>
+          </div>
+          <div class="detail-card">
+            <div class="label">Cantidad de videos</div>
+            <div class="value" id="signedProjectVideoCount">-</div>
+          </div>
+          <div class="detail-card">
+            <div class="label">Pago por video</div>
+            <div class="value" id="signedProjectPricePerVideo">-</div>
+          </div>
+          <div class="detail-card">
+            <div class="label">Pago total</div>
+            <div class="value" id="signedProjectTotalPayment">-</div>
+          </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 24px;">
+          <strong>Nota:</strong> Si tienes preguntas sobre tu contrato o necesitas una copia,
+          contacta a LA REAL MARKETING al correo: juanfe@larealmarketing.com
+        </div>
+      </section>
+    </div>
+
     <!-- Contract Form -->
     <div class="contract-form" id="contractForm">
 
@@ -824,15 +882,37 @@
         const response = await fetch(`${API_URL}/ugc/contracts/${contractToken}`);
         const data = await response.json();
 
-        if (!response.ok) {
-          // Handle specific errors
-          if (data.already_signed) {
-            document.getElementById('contractForm').classList.add('hidden');
-            document.getElementById('successMessage').classList.add('show');
-            document.querySelector('#successMessage h3').textContent = 'Contrato ya firmado';
-            document.querySelector('#successMessage p').textContent = 'Este contrato ya fue firmado anteriormente.';
-            return;
+        // Handle already signed contracts - show the signed contract view
+        if (data.already_signed) {
+          document.getElementById('contractForm').style.display = 'none';
+          document.getElementById('alreadySignedView').style.display = 'block';
+
+          // Format signed date
+          const signedDate = new Date(data.signed_at);
+          const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+          document.getElementById('signedAtDate').textContent = signedDate.toLocaleDateString('es-CO', dateOptions);
+
+          // Populate signer info
+          if (data.signer) {
+            document.getElementById('signerName').textContent = data.signer.name || '-';
+            document.getElementById('signerCedula').textContent = data.signer.cedula || '-';
+            document.getElementById('signerEmail').textContent = data.signer.email || '-';
+            document.getElementById('signerPhone').textContent = data.signer.phone || '-';
           }
+
+          // Populate project info
+          if (data.contract) {
+            document.getElementById('signedProjectBrand').textContent = data.contract.project.client_name || '-';
+            document.getElementById('signedProjectVideoCount').textContent = data.contract.payment.video_count + ' video' + (data.contract.payment.video_count > 1 ? 's' : '');
+            document.getElementById('signedProjectPricePerVideo').textContent = formatCurrency(data.contract.payment.price_per_video);
+            document.getElementById('signedProjectTotalPayment').textContent = formatCurrency(data.contract.payment.total);
+          }
+
+          console.log('✅ Already signed contract loaded:', data);
+          return;
+        }
+
+        if (!response.ok) {
           throw new Error(data.error || 'Error al cargar el contrato');
         }
 
