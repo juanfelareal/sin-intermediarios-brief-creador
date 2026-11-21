@@ -426,6 +426,10 @@
             <div class="label">Pago total</div>
             <div class="value" id="signedProjectTotalPayment">-</div>
           </div>
+          <div class="detail-card">
+            <div class="label">Uso de imagen</div>
+            <div class="value" id="signedImageRights">-</div>
+          </div>
         </div>
 
         <div class="highlight-box" style="margin-top: 24px;">
@@ -561,7 +565,7 @@
         <p>La cesión de derechos se otorga para:</p>
         <ul>
           <li><strong>Territorio:</strong> Todo el mundo, sin restricción geográfica.</li>
-          <li><strong>Duración:</strong> Por un período de <strong>dos (2) años</strong> contados a partir de la fecha de firma del presente contrato.</li>
+          <li><strong>Duración:</strong> Por un período de <strong class="js-image-rights-text">dos (2) años</strong>, contado a partir de la fecha de firma del presente contrato.</li>
         </ul>
 
       </section>
@@ -684,7 +688,7 @@
           <label for="acceptTerms">
             He leído y acepto todos los términos y condiciones de este contrato, incluyendo la
             cesión de derechos de imagen para uso en publicidad pagada y contenido orgánico
-            por un período de 2 años.
+            por un período de <span class="js-image-rights-short">2 años</span>.
           </label>
         </div>
 
@@ -857,6 +861,18 @@
 
     // API Configuration
     const API_URL = 'https://agenciapro-production.up.railway.app/api';
+    // Versión del texto legal. Cambiarla cuando cambie la redacción del contrato.
+    const CONTRACT_VERSION = '2026-11-plazo-variable';
+    // Plazo de la cesión de imagen que se le mostró a la creadora. Viene de Orbit; si la API
+    // todavía no lo manda, quedan los dos años de siempre (y así lo valida el servidor).
+    let imageRightsMonths = 24;
+
+    function applyImageRights(term) {
+      if (!term || !term.months) return;
+      imageRightsMonths = term.months;
+      document.querySelectorAll('.js-image-rights-text').forEach(el => { el.textContent = term.text; });
+      document.querySelectorAll('.js-image-rights-short').forEach(el => { el.textContent = term.short; });
+    }
 
     // Get token from URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -906,6 +922,7 @@
             document.getElementById('signedProjectVideoCount').textContent = data.contract.payment.video_count + ' video' + (data.contract.payment.video_count > 1 ? 's' : '');
             document.getElementById('signedProjectPricePerVideo').textContent = formatCurrency(data.contract.payment.price_per_video);
             document.getElementById('signedProjectTotalPayment').textContent = formatCurrency(data.contract.payment.total);
+            document.getElementById('signedImageRights').textContent = data.contract.image_rights ? data.contract.image_rights.short : '2 años';
           }
 
           console.log('✅ Already signed contract loaded:', data);
@@ -922,6 +939,7 @@
         document.getElementById('projectVideoCount').textContent = contract.payment.video_count + ' video' + (contract.payment.video_count > 1 ? 's' : '');
         document.getElementById('projectPricePerVideo').textContent = formatCurrency(contract.payment.price_per_video);
         document.getElementById('projectTotalPayment').textContent = formatCurrency(contract.payment.total);
+        applyImageRights(contract.image_rights);
 
         // Pre-fill creator data if available
         if (contract.creator.name) {
@@ -970,7 +988,11 @@
         bank_account_number: document.getElementById('accountNumber').value,
         signature_data: canvas.toDataURL('image/png'),
         accepted_terms: document.getElementById('acceptTerms').checked,
-        accepted_data_policy: document.getElementById('acceptData').checked
+        accepted_data_policy: document.getElementById('acceptData').checked,
+        image_rights_months: imageRightsMonths,
+        contract_version: CONTRACT_VERSION,
+        // Copia del texto tal como lo leyó: si la plantilla cambia después, lo firmado no cambia.
+        contract_text: document.getElementById('contractForm').innerText
       };
 
       try {
@@ -983,6 +1005,12 @@
           });
 
           const result = await response.json();
+
+          if (response.status === 409 && result.stale) {
+            alert(result.error);
+            window.location.reload();
+            return;
+          }
 
           if (!response.ok) {
             throw new Error(result.error || 'Error al firmar el contrato');
